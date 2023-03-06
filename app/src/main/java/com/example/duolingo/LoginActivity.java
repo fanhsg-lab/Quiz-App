@@ -1,7 +1,9 @@
 package com.example.duolingo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,13 +40,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        signupB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SingUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private boolean validateData()
     {
         boolean status = false;
         if(email.getText().toString().isEmpty()){
-            pass.setError("Enter E-Mail ID");
+            email.setError("Enter E-Mail ID");
             return false;
         }
 

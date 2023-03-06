@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".CategoryFragment">
 
+
+    <!-- layout για τα περιθώρια
+    app για το connection με τις άκρες
+    -->
     <GridView
         android:id="@+id/cat_Grid"
         android:layout_width="0dp"

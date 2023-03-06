@@ -53,9 +53,10 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_category, container,false);
 
         catView = view.findViewById(R.id.cat_Grid);
-
+        //παίρνω τις διάφορες κατηγορίες
         loadCategories();
 
+        //τα βάζω στον adapter
         CategoryAdapter adapter = new CategoryAdapter(catList);
         catView.setAdapter(adapter);
 

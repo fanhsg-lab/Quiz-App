@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "666981644989",
+    "project_id": "duolingo-7d815",
+    "storage_bucket": "duolingo-7d815.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666981644989:android:fb46ab5d970929e762d5d4",
+        "android_client_info": {
+          "package_name": "com.example.duolingo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666981644989-6pf0rdbafuplkf47ujgutm4rci1g9ilk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.duolingo",
+            "certificate_hash": "cd0a7cf18937076242617f762d8037648f41acaf"
+          }
+        },
+        {
+          "client_id": "666981644989-o5c5g55qrqh8b47ilvuie78656ce0i7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK9n29GROuVVws_MOHEUdoGi1znRBrYVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666981644989-o5c5g55qrqh8b47ilvuie78656ce0i7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

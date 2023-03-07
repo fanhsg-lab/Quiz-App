@@ -1,23 +1,18 @@
 package com.example.duolingo;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.NavigationView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import com.google.android.material.navigation.NavigationView;
+
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
 import com.example.duolingo.databinding.ActivityMainBinding;

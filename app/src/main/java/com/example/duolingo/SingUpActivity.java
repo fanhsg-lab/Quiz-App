@@ -1,13 +1,17 @@
 package com.example.duolingo;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +28,10 @@ public class SingUpActivity extends AppCompatActivity {
     private ImageView backB;
     private FirebaseAuth mAuth;
     private String emailStr,passStr, confirmPassStr, nameStr;
+    private Dialog progressDialog;
+    private TextView dialogText;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,15 @@ public class SingUpActivity extends AppCompatActivity {
         pass = findViewById(R.id.password);
         signUpB = findViewById(R.id.signupB);
         backB = findViewById(R.id.backB);
+
+
+        progressDialog = new Dialog(SingUpActivity.this);
+        progressDialog.setContentView(R.layout.dialog_layout);
+        progressDialog.setCancelable(false);
+        progressDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        dialogText = progressDialog.findViewById(R.id.dialog_text);
+        dialogText.setText("Registering user....");
 
         mAuth= FirebaseAuth.getInstance();
 
@@ -98,7 +114,7 @@ public class SingUpActivity extends AppCompatActivity {
     private void singupNewUser()
     {
 
-
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(emailStr, passStr)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -106,15 +122,16 @@ public class SingUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             Toast.makeText(SingUpActivity.this, "Sing Up Successfull ",Toast.LENGTH_SHORT).show();
-
+                            progressDialog.dismiss();
                             Intent intent = new Intent(SingUpActivity.this,MainActivity.class);
                             startActivity(intent);
                             SingUpActivity.this.finish();
 
 
                         } else {
+                            progressDialog.dismiss();
                             Log.e("edo", "createUserWithEmail:failure", task.getException());
-                           Toast.makeText(SingUpActivity.this, "Authentication failed.",
+                           Toast.makeText(SingUpActivity.this, "Authentication failed.   " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

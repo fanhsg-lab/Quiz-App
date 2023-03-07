@@ -7,9 +7,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashActivity extends AppCompatActivity {
 
     private TextView appName;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,8 @@ public class SplashActivity extends AppCompatActivity {
 
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.myanim);
         appName.setAnimation(anim);
+
+        mAuth = FirebaseAuth.getInstance();
 
         new Thread(){
 
@@ -33,9 +38,20 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                startActivity(intent);
-                SplashActivity.this.finish();
+                if(mAuth.getCurrentUser() != null)
+                {
+                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    SplashActivity.this.finish();
+
+                }else
+                {
+                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    SplashActivity.this.finish();
+                }
+
+
 
             }
         }.start();

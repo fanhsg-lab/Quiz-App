@@ -26,7 +26,7 @@ public class CategoryFragment extends Fragment {
     }
 
    private GridView catView;
-    private List<CategoryModel> catList = new ArrayList<>();
+    public static List<CategoryModel> catList = new ArrayList<>();
 
     public static CategoryFragment newInstance(String param1, String param2) {
         CategoryFragment fragment = new CategoryFragment();

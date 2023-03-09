@@ -38,19 +38,21 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(mAuth.getCurrentUser() != null)
-                {
-                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    SplashActivity.this.finish();
-
-                }else
-                {
-                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    SplashActivity.this.finish();
-                }
-
+//                if(mAuth.getCurrentUser() != null)
+//                {
+//                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+//                    startActivity(intent);
+//                    SplashActivity.this.finish();
+//
+//                }else
+//                {
+//                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+//                    SplashActivity.this.finish();
+//                }
+                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                startActivity(intent);
+                SplashActivity.this.finish();
 
 
             }

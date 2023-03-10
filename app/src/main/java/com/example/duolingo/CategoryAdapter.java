@@ -42,13 +42,13 @@ public class CategoryAdapter extends BaseAdapter {
             myView=view;
         }
 
-        myView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TestActivity.class);
-                intent.putExtra("CAT_INDEX", i);
-                view.getContext().startActivity(intent);
-            }
+        myView.setOnClickListener(view1 -> {
+
+            DbQuery.g_selected_cat_index = i;
+
+            Intent intent = new Intent(view1.getContext(), TestActivity.class);
+
+            view1.getContext().startActivity(intent);
         });
 
 

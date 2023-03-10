@@ -26,7 +26,7 @@ public class CategoryFragment extends Fragment {
     }
 
    private GridView catView;
-    public static List<CategoryModel> catList = new ArrayList<>();
+
 
     public static CategoryFragment newInstance(String param1, String param2) {
         CategoryFragment fragment = new CategoryFragment();
@@ -54,10 +54,10 @@ public class CategoryFragment extends Fragment {
 
         catView = view.findViewById(R.id.cat_Grid);
         //παίρνω τις διάφορες κατηγορίες
-        loadCategories();
+
 
         //τα βάζω στον adapter
-        CategoryAdapter adapter = new CategoryAdapter(catList);
+        CategoryAdapter adapter = new CategoryAdapter(DbQuery.g_catList);
         catView.setAdapter(adapter);
 
 
@@ -65,15 +65,5 @@ public class CategoryFragment extends Fragment {
         return view;
     }
 
-    private void loadCategories(){
 
-
-        catList.clear();
-
-        catList.add(new CategoryModel("1","GK",20));
-        catList.add(new CategoryModel("2","HISTORY",30));
-        catList.add(new CategoryModel("3","ENGLISH",10));
-        catList.add(new CategoryModel("4","SCIENCE",25));
-        catList.add(new CategoryModel("5","MATHS",20));
-    }
 }

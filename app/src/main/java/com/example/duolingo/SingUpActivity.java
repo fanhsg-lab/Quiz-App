@@ -130,10 +130,23 @@ public class SingUpActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
 
-                                    progressDialog.dismiss();
-                                    Intent intent = new Intent(SingUpActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                    SingUpActivity.this.finish();
+                                    DbQuery.loadCategories(new MyCompleteListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            progressDialog.dismiss();
+                                            Intent intent = new Intent(SingUpActivity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            SingUpActivity.this.finish();
+                                        }
+
+                                        @Override
+                                        public void onFailure() {
+                                            Toast.makeText(SingUpActivity.this,"Somethink went wrong ! Please Try Again",Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                        }
+                                    });
+
+
                                 }
 
                                 @Override

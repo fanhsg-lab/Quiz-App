@@ -32,7 +32,7 @@ public class TestActivity extends AppCompatActivity {
 
         int cat_index =getIntent().getIntExtra("CAT_INDEX",0);
 
-        getSupportActionBar().setTitle(CategoryFragment.catList.get(cat_index).getName());
+        getSupportActionBar().setTitle(DbQuery.g_catList.get(cat_index).getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         testView = findViewById(R.id.test_recycler_view);

@@ -27,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //αρχικοποίηση της βάσης
         DbQuery.g_firestore = FirebaseFirestore.getInstance();
 
         new Thread(){

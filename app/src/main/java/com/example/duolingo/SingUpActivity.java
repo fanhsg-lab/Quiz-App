@@ -123,6 +123,8 @@ public class SingUpActivity extends AppCompatActivity {
 
                             Toast.makeText(SingUpActivity.this, "Sing Up Successfull ",Toast.LENGTH_SHORT).show();
 
+
+                            //Create User με το DbQuery
                             DbQuery.createUserData(emailStr, nameStr, new MyCompleteListener(){
 
                                 @Override

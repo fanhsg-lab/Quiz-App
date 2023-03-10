@@ -23,7 +23,7 @@ public class DbQuery {
     public static void createUserData(String email, String name, MyCompleteListener completeListener )
     {
         Map<String, Object> userData = new ArrayMap<>();
-
+        //αρχικοποιώ τον user
         userData.put("EMAIL_ID" ,email);
         userData.put("NAME",name);
         userData.put("TOTAL_SCORE",0);
@@ -35,8 +35,10 @@ public class DbQuery {
         batch.set(userDoc,userData);
 
         DocumentReference countDoc = g_firestore.collection("USERS").document("TOTAL_USERS");
+        //αυξάνω κατά 1 το COUNT
         batch.update(countDoc,"COUNT", FieldValue.increment(1));
 
+        //εδώ γίνεται το commit
         batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

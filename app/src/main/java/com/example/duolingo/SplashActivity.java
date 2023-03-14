@@ -1,12 +1,13 @@
 package com.example.duolingo;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,37 +44,32 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-//                if(mAuth.getCurrentUser() != null)
-//                {
+                if(mAuth.getCurrentUser() != null)
+                {
 
-//                       DbQuery.loadData(new MyCompleteListener() {
-//                           @Override
-//                           public void onSuccess() {
-//                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-//                    startActivity(intent);
-//                    SplashActivity.this.finish();
-//                           }
-//
-//                           @Override
-//                           public void onFailure() {
-//                Toast.makeText(SplashActivity.this,"Somethink went wrong ! Please Try Again",Toast.LENGTH_SHORT).show();
+                       DbQuery.loadData(new MyCompleteListener() {
+                           @Override
+                           public void onSuccess() {
+                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    SplashActivity.this.finish();
+                           }
 
-//                           }
-//                       });
+                           @Override
+                           public void onFailure() {
+                Toast.makeText(SplashActivity.this,"Somethink went wrong ! Please Try Again",Toast.LENGTH_SHORT).show();
+
+                           }
+                       });
 
 
-//
-//                }else
-//                {
-//                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-//                startActivity(intent);
-//                SplashActivity.this.finish();
-//                }
 
+                }else
+                {
                 Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                 startActivity(intent);
                 SplashActivity.this.finish();
-
+                }
             }
         }.start();
 

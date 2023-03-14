@@ -41,16 +41,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     switch (menuItem.getItemId())
                     {
-                        case R.id.nav_home:
+                        case R.id.navigation_home:
                             setFragement(new CategoryFragment());
+                           // bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                             return true;
 
-                        case R.id.nav_leaderboard:
+                        case R.id.navigation_leaderboard:
                             setFragement(new LeaderBoardFragment());
+                          //  bottomNavigationView.setSelectedItemId(R.id.navigation_leaderboard);
                             return true;
 
-                        case R.id.nav_account:
+                        case R.id.navigation_account:
                             setFragement(new AccountFragment());
+                           // bottomNavigationView.setSelectedItemId(R.id.navigation_account);
                             return true;
 
 
@@ -128,16 +131,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         if (id == R.id.nav_home) {
             setFragement(new CategoryFragment());
+            bottomNavigationView.setSelectedItemId(R.id.navigation_home);
             return true;
         }
         else if (id == R.id.nav_leaderboard) {
             // Handle the gallery action
             setFragement(new LeaderBoardFragment());
+            bottomNavigationView.setSelectedItemId(R.id.navigation_leaderboard);
             return true;
 
         }
         else if (id == R.id.nav_account) {
             // Handle the slideshow action
+            bottomNavigationView.setSelectedItemId(R.id.navigation_account);
             setFragement(new AccountFragment());
             return true;
 

@@ -2,11 +2,7 @@ package com.example.duolingo;
 
 import android.app.Dialog;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,6 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -22,14 +21,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -131,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this, "Login Success",Toast.LENGTH_SHORT).show();
 
-                            DbQuery.loadCategories(new MyCompleteListener() {
+                            DbQuery.loadData(new MyCompleteListener() {
                                 @Override
                                 public void onSuccess() {
                                     progressDialog.dismiss();
@@ -206,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                                      public void onSuccess() {
 
 
-                                         DbQuery.loadCategories(new MyCompleteListener() {
+                                         DbQuery.loadData(new MyCompleteListener() {
                                              @Override
                                              public void onSuccess() {
 
@@ -244,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                                  });
                                 }else
                                 {
-                                    DbQuery.loadCategories(new MyCompleteListener() {
+                                    DbQuery.loadData(new MyCompleteListener() {
                                         @Override
                                         public void onSuccess() {
 

@@ -1,27 +1,37 @@
 package com.example.duolingo;
 
+import static com.example.duolingo.R.id.nav_host_fragment_content_main;
+
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.FrameLayout;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.duolingo.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Locale;
+
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private FrameLayout main_frame;
+    private TextView drawerProfileName, drawerProfileText;
 
     private BottomNavigationView bottomNavigationView;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=
@@ -53,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -74,7 +86,22 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
+
+        drawerProfileName = navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_name);
+        drawerProfileText = navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_text_img);
+
+        String name = DbQuery.myProfile.getName();
+        drawerProfileName.setText(name);
+
+        drawerProfileText.setText(name.toUpperCase(Locale.ROOT).substring(0,1));
+
         setFragement(new CategoryFragment());
+
+        NavController navController = Navigation.findNavController(this, nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -86,5 +113,47 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Log.d("edo","mphka1");
+        int id = menuItem.getItemId();
+        if (id == R.id.nav_home) {
+            setFragement(new CategoryFragment());
+            return true;
+        }
+        else if (id == R.id.nav_leaderboard) {
+            // Handle the gallery action
+            setFragement(new LeaderBoardFragment());
+            return true;
+
+        }
+        else if (id == R.id.nav_account) {
+            // Handle the slideshow action
+            setFragement(new AccountFragment());
+            return true;
+
+        }
+
+
+
+        DrawerLayout drawer = binding.drawerLayout;
+        drawer.closeDrawer(GravityCompat.START);
+
+
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }

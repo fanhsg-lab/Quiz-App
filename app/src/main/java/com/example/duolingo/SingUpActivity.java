@@ -130,7 +130,7 @@ public class SingUpActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
 
-                                    DbQuery.loadCategories(new MyCompleteListener() {
+                                    DbQuery.loadData(new MyCompleteListener() {
                                         @Override
                                         public void onSuccess() {
                                             progressDialog.dismiss();

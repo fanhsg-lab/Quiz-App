@@ -161,7 +161,8 @@ public class DbQuery {
                                     doc.getString("B"),
                                     doc.getString("C"),
                                     doc.getString("D"),
-                                    doc.getLong("ANSWER").intValue()
+                                    doc.getLong("ANSWER").intValue(),
+                                    -1
                             ));
                             Log.d("que1", "mphka");
 

@@ -31,6 +31,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private ImageButton prevQuesB, nextQuesB;
     private ImageView quesListB;
     private int quesID;
+    QuestionsAdapter quesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         init();
 
-        QuestionsAdapter quesAdapter = new QuestionsAdapter(g_quesList);
+        quesAdapter = new QuestionsAdapter(g_quesList);
         questionsView.setAdapter(quesAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -124,6 +125,16 @@ public class QuestionsActivity extends AppCompatActivity {
                 {
                     questionsView.smoothScrollToPosition(quesID + 1);
                 }
+            }
+        });
+
+        clearSelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                g_quesList.get(quesID).setSelectedAns(-1);
+
+                quesAdapter.notifyDataSetChanged();
             }
         });
 

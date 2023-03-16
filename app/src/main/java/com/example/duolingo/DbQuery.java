@@ -33,6 +33,13 @@ public class DbQuery {
 
     public  static ProfileModel myProfile = new ProfileModel("NA",null);
 
+    public static final int NOT_VISITED =0;
+    public static final int UNANSWERED =1;
+    public static final int ANSWERED =2;
+    public static final int REVIEW =3;
+
+
+
     public static void createUserData(String email, String name, final MyCompleteListener completeListener )
     {
         Map<String, Object> userData = new ArrayMap<>();
@@ -144,7 +151,7 @@ public class DbQuery {
     public static void loadquestions(MyCompleteListener completeListener)
     {
 
-       // g_quesList.clear();
+        g_quesList.clear();
         g_firestore.collection("Questions")
                 .whereEqualTo("CATEGORY", g_catList.get(g_selected_cat_index).getDocID())
                 .whereEqualTo("TEST", g_testList.get(g_selected_test_index).getTestID())
@@ -162,7 +169,8 @@ public class DbQuery {
                                     doc.getString("C"),
                                     doc.getString("D"),
                                     doc.getLong("ANSWER").intValue(),
-                                    -1
+                                    -1,
+                                    NOT_VISITED
                             ));
                             Log.d("que1", "mphka");
 

@@ -1,5 +1,9 @@
 package com.example.duolingo;
 
+import static com.example.duolingo.DbQuery.ANSWERED;
+import static com.example.duolingo.DbQuery.NOT_VISITED;
+import static com.example.duolingo.DbQuery.REVIEW;
+import static com.example.duolingo.DbQuery.UNANSWERED;
 import static com.example.duolingo.DbQuery.g_catList;
 import static com.example.duolingo.DbQuery.g_quesList;
 import static com.example.duolingo.DbQuery.g_selected_cat_index;
@@ -39,6 +43,8 @@ public class QuestionsActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private ImageButton drawerCloseB;
     private GridView quesListGV;
+    private ImageView markImage;
+    private QuestionGridAdapter gridAdapter;
 
 
     @Override
@@ -54,6 +60,10 @@ public class QuestionsActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         questionsView.setLayoutManager(layoutManager);
+
+        gridAdapter = new QuestionGridAdapter(this, g_quesList.size());
+        quesListGV.setAdapter(gridAdapter);
+
 
         setSnapHelper();
 
@@ -77,6 +87,8 @@ public class QuestionsActivity extends AppCompatActivity {
         nextQuesB = findViewById(R.id.next_quesB);
         quesListB = findViewById(R.id.ques_list_gridB);
         drawer = findViewById(R.id.drawer_layout);
+        markImage = findViewById(R.id.mark_image);
+        quesListGV = findViewById(R.id.ques_list_gv);
 
         drawerCloseB = findViewById(R.id.drawerCloseB);
 
@@ -102,6 +114,11 @@ public class QuestionsActivity extends AppCompatActivity {
 
                 View view = snapHelper.findSnapView(recyclerView.getLayoutManager());
                 quesID = recyclerView.getLayoutManager().getPosition(view);
+
+                if(g_quesList.get(quesID).getStatus()== NOT_VISITED)
+                {
+                    g_quesList.get(quesID).setStatus(UNANSWERED);
+                }
 
                 tvQuesID.setText(String.valueOf(quesID + 1) + "/" + String.valueOf(g_quesList.size()));
             }
@@ -154,6 +171,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
                 if(! drawer.isDrawerOpen(GravityCompat.END))
                 {
+                    gridAdapter.notifyDataSetChanged();
                     drawer.openDrawer(GravityCompat.END);
                 }
             }
@@ -173,7 +191,41 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
 
+        markB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(markImage.getVisibility() != View.VISIBLE)
+                {
+
+                    markImage.setVisibility(View.VISIBLE);
+
+                    g_quesList.get(quesID).setStatus(REVIEW);
+                }
+                else
+                {
+                    markImage.setVisibility(View.GONE);
+
+                    if(g_quesList.get(quesID).getSelectedAns() != -1)
+                    {
+                        g_quesList.get(quesID).setStatus(ANSWERED);
+                    }
+                    else
+                    {
+                        g_quesList.get(quesID).setStatus(UNANSWERED);
+                    }
+                }
+            }
+        });
+
+    }
+
+    public void goToQuestion(int position)
+    {
+        questionsView.smoothScrollToPosition(position);
+
+        if(drawer.isDrawerOpen(GravityCompat.END))
+            drawer.closeDrawer(GravityCompat.END);
     }
 
     private void startTimer()

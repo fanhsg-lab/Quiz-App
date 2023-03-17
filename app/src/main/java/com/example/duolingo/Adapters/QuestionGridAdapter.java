@@ -1,4 +1,4 @@
-package com.example.duolingo;
+package com.example.duolingo.Adapters;
 
 import static com.example.duolingo.DbQuery.ANSWERED;
 import static com.example.duolingo.DbQuery.NOT_VISITED;
@@ -15,6 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+
+import com.example.duolingo.DbQuery;
+import com.example.duolingo.QuestionsActivity;
+import com.example.duolingo.R;
 
 public class QuestionGridAdapter extends BaseAdapter {
 

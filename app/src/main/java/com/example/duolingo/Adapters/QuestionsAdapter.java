@@ -1,4 +1,4 @@
-package com.example.duolingo;
+package com.example.duolingo.Adapters;
 
 import static com.example.duolingo.DbQuery.ANSWERED;
 import static com.example.duolingo.DbQuery.REVIEW;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.duolingo.DbQuery;
+import com.example.duolingo.Models.QuestionModel;
+import com.example.duolingo.R;
 
 import java.util.List;
 

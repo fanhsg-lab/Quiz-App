@@ -1,4 +1,4 @@
-package com.example.duolingo;
+package com.example.duolingo.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.duolingo.DbQuery;
+import com.example.duolingo.Models.TestModel;
+import com.example.duolingo.R;
+import com.example.duolingo.StartTestActivity;
 
 import java.util.List;
 
@@ -70,7 +75,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
                     DbQuery.g_selected_test_index= pos;
 
-                    Intent intent = new Intent(itemView.getContext(),StartTestActivity.class);
+                    Intent intent = new Intent(itemView.getContext(), StartTestActivity.class);
                     itemView.getContext().startActivity(intent);
                 }
             });

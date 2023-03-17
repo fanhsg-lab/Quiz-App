@@ -1,4 +1,4 @@
-package com.example.duolingo;
+package com.example.duolingo.Models;
 
 
 

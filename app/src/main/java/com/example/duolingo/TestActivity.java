@@ -1,21 +1,19 @@
 package com.example.duolingo;
 
+import android.app.Dialog;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.duolingo.Adapters.TestAdapter;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -36,8 +34,6 @@ public class TestActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-
 
         getSupportActionBar().setTitle(DbQuery.g_catList.get(DbQuery.g_selected_cat_index).getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,10 +61,26 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
 
-                adapter = new TestAdapter(DbQuery.g_testList);
-                testView.setAdapter(adapter);
+                DbQuery.loadMyScores(new MyCompleteListener() {
+                    @Override
+                    public void onSuccess() {
+                        adapter = new TestAdapter(DbQuery.g_testList);
+                        testView.setAdapter(adapter);
 
-                progressDialog.dismiss();
+                        progressDialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                        progressDialog.dismiss();
+                        Toast.makeText(TestActivity.this,  "Somethink went wrong ! Please try Again",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
 
             @Override

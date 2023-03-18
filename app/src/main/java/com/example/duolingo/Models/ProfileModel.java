@@ -5,6 +5,7 @@ package com.example.duolingo.Models;
 public class ProfileModel {
     private String name;
     private String email;
+    private String phone;
 
     public String getName() {
         return name;
@@ -22,11 +23,17 @@ public class ProfileModel {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-   public ProfileModel(String name, String email){
-       this.name =name;
-       this.email =email;
-   }
-
+    public ProfileModel(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
 }

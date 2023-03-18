@@ -128,6 +128,9 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(getContext(), MyProfileActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -145,12 +148,12 @@ public class AccountFragment extends Fragment {
     {
         logoutB = view.findViewById(R.id.logoutB);
         profile_img_text = view.findViewById(R.id.profile_img_text);
-        name = view.findViewById(R.id.logoutB);
-        score = view.findViewById(R.id.logoutB);
-        rank = view.findViewById(R.id.logoutB);
-        leaderB = view.findViewById(R.id.logoutB);
-        bookmarksB = view.findViewById(R.id.logoutB);
-        profileB = view.findViewById(R.id.logoutB);
+        name = view.findViewById(R.id.name);
+        score = view.findViewById(R.id.total_score);
+        rank = view.findViewById(R.id.rank);
+        leaderB = view.findViewById(R.id.leaderB);
+        bookmarksB = view.findViewById(R.id.bookmarkB);
+        profileB = view.findViewById(R.id.profileB);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_nav_bar);
 
     }

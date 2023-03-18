@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -15,7 +17,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,10 @@ public class AccountFragment extends Fragment {
 
 
     private LinearLayout logoutB;
+    private TextView profile_img_text, name ,score ,rank;
+    private LinearLayout leaderB, profileB, bookmarksB;
+    private BottomNavigationView bottomNavigationView;
+
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +73,19 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        logoutB = view.findViewById(R.id.logoutB);
+        initViews(view);
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("My Account");
+
+        String userName = DbQuery.myProfile.getName();
+        profile_img_text.setText(userName.toUpperCase(Locale.ROOT).substring(0,1));
+
+         name.setText(userName);
+         score.setText(String.valueOf(DbQuery.myPerformance.getScore()));
+
+
+
 
         logoutB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +117,43 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        bookmarksB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        profileB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        leaderB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomNavigationView.setSelectedItemId(R.id.navigation_leaderboard);
+            }
+        });
+
         return view;
     }
+    private  void initViews(View view)
+    {
+        logoutB = view.findViewById(R.id.logoutB);
+        profile_img_text = view.findViewById(R.id.profile_img_text);
+        name = view.findViewById(R.id.logoutB);
+        score = view.findViewById(R.id.logoutB);
+        rank = view.findViewById(R.id.logoutB);
+        leaderB = view.findViewById(R.id.logoutB);
+        bookmarksB = view.findViewById(R.id.logoutB);
+        profileB = view.findViewById(R.id.logoutB);
+        bottomNavigationView = getActivity().findViewById(R.id.bottom_nav_bar);
+
+    }
+
+
 }

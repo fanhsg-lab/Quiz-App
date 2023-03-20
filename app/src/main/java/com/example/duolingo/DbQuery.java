@@ -140,7 +140,9 @@ public class DbQuery {
                             myProfile.setPhone(documentSnapshot.getString("PHONE"));
 
                         if(documentSnapshot.get("BOOKMARKS") != null)
+                            Log.d("book1","axa mphka kai edo");
                             myProfile.setBookmarksCount(documentSnapshot.getLong("BOOKMARKS").intValue());
+                             Log.d("book1","axa mphka kai edo " +  documentSnapshot.getLong("BOOKMARKS").intValue());
 
                         myPerformance.setScore(documentSnapshot.getLong("TOTAL_SCORE").intValue());
                         myPerformance.setName(documentSnapshot.getString("NAME"));
@@ -203,11 +205,12 @@ public class DbQuery {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                        Log.d("book1","mphka sthn klash ");
                         int count = myProfile.getBookmarksCount();
 
                         for(int i=0; i < count; i++)
                         {
+                            Log.d("book1","mphka sto add");
                             String bmID = documentSnapshot.getString("BM" + String.valueOf(i+1) + "_ID");
                             g_bmIdList.add(bmID);
                         }
@@ -306,6 +309,7 @@ public class DbQuery {
 
         for(int i=0; i < g_bmIdList.size(); i++)
         {
+            Log.d("book1", "mphka sto save Result ID");
             bmData.put("BM" + String.valueOf(i+1) + "_ID" , g_bmIdList.get(i));
         }
 
@@ -318,9 +322,10 @@ public class DbQuery {
 
         Map<String, Object> userData = new ArrayMap<>();
         userData.put("TOTAL_SCORE",score);
+        Log.d("book1", "mphka sto save Result ID me size " + g_bmIdList.size());
         userData.put("BOOKMARKS", g_bmIdList.size());
 
-        batch.update(userDoc, "TOTAL_SCORE", score);
+        batch.update(userDoc, userData);
 
 
         if(score > g_testList.get(g_selected_test_index).getTopScore())

@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.duolingo.Models.QuestionModel;
+
 import java.util.concurrent.TimeUnit;
 
 public class ScoreActivity extends AppCompatActivity {
@@ -51,6 +53,8 @@ public class ScoreActivity extends AppCompatActivity {
         init();
 
         loadData();
+
+        setBookMarks();
 
         viewAnsB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +169,37 @@ public class ScoreActivity extends AppCompatActivity {
         });
 
     }
+
+    private void setBookMarks()
+    {
+
+        for(int i=0; i< DbQuery.g_quesList.size(); i++)
+        {
+
+            QuestionModel question = DbQuery.g_quesList.get(i);
+
+            if(question.isBookmarked())
+            {
+                if(! DbQuery.g_bmIdList.contains(question.getqID()))
+                {
+                    DbQuery.g_bmIdList.add(question.getqID());
+                    DbQuery.myProfile.setBookmarksCount(DbQuery.g_bmIdList.size());
+                }
+
+            }
+            else
+            {
+
+                if(DbQuery.g_bmIdList.contains(question.getqID()))
+                {
+                    DbQuery.g_bmIdList.remove(question.getqID());
+                    DbQuery.myProfile.setBookmarksCount(DbQuery.g_bmIdList.size());
+                }
+            }
+        }
+    }
+
+
     @Override
     //piso koympi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

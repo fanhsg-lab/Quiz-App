@@ -2,6 +2,7 @@ package com.example.duolingo;
 
 import static com.example.duolingo.R.id.nav_host_fragment_content_main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -154,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragement(new AccountFragment());
             return true;
 
+        }
+        else if (id ==R.id.nav_bookmark) {
+
+            Intent intent = new Intent(MainActivity.this, BookmarksActivity.class);
+            startActivity(intent);
         }
 
 
